@@ -1,6 +1,8 @@
 package instactile.models;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A battle zone is the zone owned by a player in which creatures spawn and can be exploded.
@@ -10,7 +12,8 @@ public class BattleZone {
     
     private final int horizontalPosition;
     private final int verticalPosition;
-    private BattleGround battleGround;
+    private final BattleGround battleGround;
+    private final List<Entity> creatures;
     
     /**
      * Default constructor of a battle zone. All given positions begins at zero.
@@ -22,6 +25,7 @@ public class BattleZone {
         this.horizontalPosition = horizontalPosition;
         this.verticalPosition = verticalPosition;
         this.battleGround = battleGround;
+        this.creatures = new ArrayList<Entity>();
     }
     
     /**
@@ -30,5 +34,21 @@ public class BattleZone {
      */
     public Point getPosition() {
         return new Point(horizontalPosition, verticalPosition);
+    }
+    
+    public BattleGround getBattleGround() {
+        return this.battleGround;
+    }
+    
+    public void removeCreature(Entity creature) {
+        creatures.remove(creature);
+    }
+    
+    public void addCreature(Entity creature) {
+        creatures.add(creature);
+    }
+    
+    public List<Entity> getCreatures() {
+        return creatures;
     }
 }
