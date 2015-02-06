@@ -1,7 +1,7 @@
 package instactile.MT4JComponents;
 
-import instactile.factories.BattleZonesFactory;
 import instactile.models.BattleGround;
+import instactile.models.BattleZone;
 import org.mt4j.components.visibleComponents.shapes.MTRectangle;
 import processing.core.PApplet;
 
@@ -10,11 +10,16 @@ import processing.core.PApplet;
  * b.milhau@insta.fr
  */
 public class BattleZoneGraphic extends MTRectangle {
+    
+    private BattleZone battleZone;
+    private BattleGround battleGround;
 
-    public BattleZoneGraphic(float x, float y, float width, float height, BattleGround battleGround, PApplet pApplet) {
+    public BattleZoneGraphic(float x, float y, float width, float height, BattleZone battleZone,BattleGround battleGround, PApplet pApplet) {
         super(x, y, width, height, pApplet);
+        this.battleGround = battleGround;
+        this.battleZone = battleZone;
+        this.unregisterAllInputProcessors();
         
-        BattleZonesFactory.createBattleZone(battleGround);
     }
 
 }
