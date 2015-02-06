@@ -5,17 +5,24 @@
  */
 package instactile;
 
+import org.mt4j.MTApplication;
+
 /**
  *
  * @author Babausse
  */
-public class Instactile {
+public class Instactile extends MTApplication {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        initialize();
+    }
+
+    @Override
+    public void startUp() {
+        
     }
     
 }
