@@ -1,8 +1,6 @@
 package instactile.models;
 
 import instactile.factories.BattleZonesFactory;
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
