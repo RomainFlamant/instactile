@@ -33,7 +33,7 @@ public class BattleZoneTest {
         System.out.println("  #addCreature");
         System.out.println("    - MUST correctly add a creature to the creatures in that zone.");
         
-        BattleZone zone = new BattleZone(new BattleGround(2), 0, 0);
+        BattleZone zone = new BattleZone(new BattleGround(2), "test", 0, 0);
         Entity creature = new Entity(zone);
         
         zone.addCreature(creature);
@@ -47,7 +47,7 @@ public class BattleZoneTest {
         System.out.println("  #removeCreature");
         System.out.println("    - MUST correctly remove a creature from the creatures in that zone.");
         
-        BattleZone zone = new BattleZone(new BattleGround(2), 0, 0);
+        BattleZone zone = new BattleZone(new BattleGround(2), "test", 0, 0);
         Entity creature = new Entity(zone);
         
         zone.addCreature(new Entity(zone));
@@ -62,7 +62,7 @@ public class BattleZoneTest {
     public void testRemoveCreatureWhenNoCreatures() {
         System.out.println("    - MUST NOT remove any creature or fail if the creatures list is empty.");
         
-        BattleZone zone = new BattleZone(new BattleGround(2), 0, 0);
+        BattleZone zone = new BattleZone(new BattleGround(2), "test", 0, 0);
         Entity creature = new Entity(zone);
         
         zone.removeCreature(creature);
@@ -74,7 +74,7 @@ public class BattleZoneTest {
     public void testRemoveCreatureIfCreatureNotInList() {
         System.out.println("    - MUST NOT remove any creature or fail if the creature is not in the list.");
         
-        BattleZone zone = new BattleZone(new BattleGround(2), 0, 0);
+        BattleZone zone = new BattleZone(new BattleGround(2), "test", 0, 0);
         Entity creature = new Entity(zone);
         
         zone.addCreature(new Entity(zone));
