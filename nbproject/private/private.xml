@@ -10,5 +10,16 @@
             <file>file:/C:/Users/Babausse/workspace/netbeans/instactile/src/instactile/models/BattleZone.java</file>
             <file>file:/C:/Users/Babausse/workspace/netbeans/instactile/test/instactile/factories/BattleZonesFactoryTest.java</file>
         </group>
+        <group>
+            <file>file:/C:/Users/Drazhel/Documents/NetBeansProjects/instactile/test/instactile/factories/BattleZonesFactoryTest.java</file>
+            <file>file:/C:/Users/Drazhel/Documents/NetBeansProjects/instactile/config/settings.ini</file>
+            <file>file:/C:/Users/Drazhel/Documents/NetBeansProjects/instactile/src/instactile/Instactile.java</file>
+            <file>file:/C:/Users/Drazhel/Documents/NetBeansProjects/instactile/src/instactile/MT4JComponents/BattleGroundScene.java</file>
+            <file>file:/C:/Users/Drazhel/Documents/NetBeansProjects/instactile/src/instactile/models/BattleZone.java</file>
+            <file>file:/C:/Users/Drazhel/Documents/NetBeansProjects/instactile/src/instactile/models/BattleGround.java</file>
+            <file>file:/C:/Users/Drazhel/Documents/NetBeansProjects/instactile/src/instactile/factories/BattleZonesFactory.java</file>
+            <file>file:/C:/Users/Drazhel/Documents/NetBeansProjects/instactile/src/instactile/MT4JComponents/BattleZoneGraphic.java</file>
+            <file>file:/C:/Users/Drazhel/Documents/NetBeansProjects/instactile/src/instactile/factories/BattleZonesGraphicFactory.java</file>
+        </group>
     </open-files>
 </project-private>

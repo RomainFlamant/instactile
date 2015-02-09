@@ -30,9 +30,10 @@ public class BattleZonesFactory {
     
     public static List<BattleZone> createZones(BattleGround battleGround, int horizontalNumber, int verticalNumber) {
         List<BattleZone> zones = new ArrayList<BattleZone>();
+        Integer x = 0;
         for(int i = 0; i < horizontalNumber; i++) {
-            for(int j = 0; j < verticalNumber; j++) {
-                zones.add(new BattleZone(battleGround, i, j));
+            for(int j = 0; j < verticalNumber; j++, x++) {
+                zones.add(new BattleZone(battleGround, "zone"+x,i, j));
             }
         }
         return zones;

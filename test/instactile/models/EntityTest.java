@@ -30,7 +30,7 @@ public class EntityTest {
         System.out.println("  #onClick");
         System.out.println("    - MUST remove the current creature from its former zone.");
         
-        BattleZone zone = new BattleZone(new BattleGround(2), 0, 0);
+        BattleZone zone = new BattleZone(new BattleGround(2), "test", 0, 0);
         Entity creature = new Entity(zone);
         
         zone.addCreature(creature);

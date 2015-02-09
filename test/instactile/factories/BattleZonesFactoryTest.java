@@ -63,4 +63,53 @@ public class BattleZonesFactoryTest {
         List<BattleZone> zones = BattleZonesFactory.createZones(battleGround, 1, 2);
         assertEquals(zones.size(), 2);
     }
+    
+    @Test
+    public void testNameZone0() {
+        System.out.println("  #createZones");
+        System.out.println("    - MUST correctly name zone0.");
+        
+        List<BattleZone> zones = BattleZonesFactory.createBattleZone(new BattleGround(6));
+        assertEquals(zones.get(0).getName(), "zone0");
+    }
+    @Test
+    public void testNameZone1() {
+        System.out.println("  #createZones");
+        System.out.println("    - MUST correctly name zone1.");
+        
+        List<BattleZone> zones = BattleZonesFactory.createBattleZone(new BattleGround(6));
+        assertEquals(zones.get(1).getName(), "zone1");
+    }
+    @Test
+    public void testNameZone2() {
+        System.out.println("  #createZones");
+        System.out.println("    - MUST correctly name zone2.");
+        
+        List<BattleZone> zones = BattleZonesFactory.createBattleZone(new BattleGround(6));
+        assertEquals(zones.get(2).getName(), "zone2");
+    }
+    @Test
+    public void testNameZone3() {
+        System.out.println("  #createZones");
+        System.out.println("    - MUST correctly name zone3.");
+        
+        List<BattleZone> zones = BattleZonesFactory.createBattleZone(new BattleGround(6));
+        assertEquals(zones.get(3).getName(), "zone3");
+    }
+    @Test
+    public void testNameZone4() {
+        System.out.println("  #createZones");
+        System.out.println("    - MUST correctly name zone4.");
+        
+        List<BattleZone> zones = BattleZonesFactory.createBattleZone(new BattleGround(6));
+        assertEquals(zones.get(4).getName(), "zone4");
+    }
+    @Test
+    public void testNameZone5() {
+        System.out.println("  #createZones");
+        System.out.println("    - MUST correctly name zone5.");
+        
+        List<BattleZone> zones = BattleZonesFactory.createBattleZone(new BattleGround(6));
+        assertEquals(zones.get(5).getName(), "zone5");
+    }
 }

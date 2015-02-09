@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class BattleZone {
     
+    private final String name;
     private final int horizontalPosition;
     private final int verticalPosition;
     private final BattleGround battleGround;
@@ -18,10 +19,12 @@ public class BattleZone {
     /**
      * Default constructor of a battle zone. All given positions begins at zero.
      * @param battleGround the battleground in which the zones are drawn.
+     * @param name the name of the zone
      * @param horizontalPosition the horizontal position of the zone in the whole battleground.
      * @param verticalPosition the vertical position of the zone in the whole battleground.
      */
-    public BattleZone(BattleGround battleGround, int horizontalPosition, int verticalPosition) {
+    public BattleZone(BattleGround battleGround, String name, int horizontalPosition, int verticalPosition) {
+        this.name = name;
         this.horizontalPosition = horizontalPosition;
         this.verticalPosition = verticalPosition;
         this.battleGround = battleGround;
@@ -38,6 +41,10 @@ public class BattleZone {
     
     public BattleGround getBattleGround() {
         return this.battleGround;
+    }
+
+    public String getName() {
+        return name;
     }
     
     public void removeCreature(Entity creature) {
