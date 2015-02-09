@@ -1,13 +1,5 @@
 package instactile.MT4JComponents;
-
-import antlr.collections.impl.Vector;
-import instactile.factories.BattleZonesGraphicFactory;
-import instactile.models.BattleGround;
-import java.awt.Component;
-import java.util.List;
 import org.mt4j.AbstractMTApplication;
-import org.mt4j.MTApplication;
-import org.mt4j.components.MTCanvas;
 import org.mt4j.components.MTComponent;
 import org.mt4j.components.visibleComponents.shapes.MTRectangle;
 import org.mt4j.components.visibleComponents.widgets.MTImage;
@@ -16,8 +8,6 @@ import org.mt4j.input.inputProcessors.MTGestureEvent;
 import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapEvent;
 import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapProcessor;
 import org.mt4j.sceneManagement.AbstractScene;
-import org.mt4j.sceneManagement.Iscene;
-import org.mt4j.sceneManagement.transition.BlendTransition;
 import org.mt4j.sceneManagement.transition.FlipTransition;
 import org.mt4j.util.MTColor;
 import org.mt4j.util.math.Vector3D;
@@ -47,6 +37,7 @@ public class ChoosePlayMode extends AbstractScene {
     MTImage MTPlayMessage = null;
     PImage Selector = null;
     MTImage MTSelector = null;
+    MTRectangle MTINITBACK = null;
     
     int WIDTH;
     int HEIGHT;
@@ -62,10 +53,10 @@ public class ChoosePlayMode extends AbstractScene {
         this.WIDTH = mtApplication.width;
         this.setClearColor(MTColor.WHITE);
         this.getCanvas().unregisterAllInputProcessors();
+        PImage INITBACK = mtApplication.loadImage("data/image/White.png");
+        MTINITBACK = new MTRectangle(mtApplication, INITBACK);
         initImage();
-        reload();
-        
-        
+        ReloadGUI();
     }
 
     private void initImage() {
@@ -88,6 +79,7 @@ public class ChoosePlayMode extends AbstractScene {
         MTFourKillerMessage.unregisterAllInputProcessors();
         MTFourKillerMessage.setSizeXYGlobal(WIDTH / 5f , 150);
         MTFourKillerMessage.setPositionGlobal(new Vector3D(WIDTH/2, 300));
+        addTapProcessor(MTFourKillerMessage, "4PlayerTap");
         
         
         SixKillerMessage = mtApplication.loadImage("data/image/6Killer.png");
@@ -95,6 +87,7 @@ public class ChoosePlayMode extends AbstractScene {
         MTSixKillerMessage.unregisterAllInputProcessors();
         MTSixKillerMessage.setSizeXYGlobal(WIDTH / 5f , 150);
         MTSixKillerMessage.setPositionGlobal(new Vector3D(WIDTH-300, 300));
+        addTapProcessor(MTSixKillerMessage, "6PlayerTap");
         
         
         ChoosePlayMessage = mtApplication.loadImage("data/image/ChoosePlayList.png");
@@ -128,83 +121,58 @@ public class ChoosePlayMode extends AbstractScene {
         MTPlayMessage.unregisterAllInputProcessors();
         MTPlayMessage.setSizeXYGlobal(WIDTH / 5f , 130);
         MTPlayMessage.setPositionGlobal(new Vector3D(WIDTH/2, 800));
+        addTapProcessor(MTPlayMessage, "Start");
         
-        System.out.println("Start Selector");
         Selector = mtApplication.loadImage("data/image/Selector.png");
         MTSelector = new MTImage(mtApplication, Selector);
         MTSelector.unregisterAllInputProcessors();
         MTSelector.setSizeXYGlobal(WIDTH / 4f , 220);
-        if (NbrPlayer == 2)
-            MTSelector.setPositionGlobal(new Vector3D(WIDTH/2, 300));
-        else if (NbrPlayer == 4)
-            MTSelector.setPositionGlobal(new Vector3D(WIDTH/2, 300));
-        else
-            MTSelector.setPositionGlobal(new Vector3D(WIDTH/2, 300));
-        System.out.println("End Selector");
     }
+    
+    private String GlobalplayerTap;
 
     private void addTapProcessor(MTComponent mtComp, String playerTap) {
         mtComp.registerInputProcessor(new TapProcessor(mtApplication, 15));
         
-        if (playerTap == "2PlayerTap")
-        {
-            NbrPlayer = 2;
-            reload();
-        }
-        else if (playerTap == "4PlayerTap")
-        {
-            NbrPlayer = 4;
-            reload();
-        }
-        else if (playerTap == "6PlayerTap")
-        {
-            NbrPlayer = 6;
-            reload();
-        }
-        else if (playerTap == "Soul")
-        {
-            PlayList = 3;
-            reload();
-        }
-        else if (playerTap == "Devil")
-        {
-            PlayList = 1;
-            reload();
-        }
-        else if (playerTap == "Metroid")
-        {
-            PlayList = 2;
-            reload();
-        }
-        else if (playerTap == "Start")
-        {
+        GlobalplayerTap = playerTap;
             mtComp.addGestureListener(TapProcessor.class, new IGestureEventListener() {
+                    @Override
                     public boolean processGestureEvent(MTGestureEvent ge) {
                         TapEvent te = (TapEvent) ge;
                         if (te.isTapped()) {
                             System.out.println("Tap detect");
-                            final BattleGroundScene battleGroundScene = new BattleGroundScene(mtApplication, "battleGroundScene", NbrPlayer);
-                            battleGroundScene.setTransition(new FlipTransition(mtApplication, 800));
-                            mtApplication.addScene(battleGroundScene);
-                            mtApplication.pushScene(); 
-                            mtApplication.changeScene(battleGroundScene);
+                            if ("2PlayerTap".equals(GlobalplayerTap))
+                                NbrPlayer = 2;
+                            else if ("4PlayerTap".equals(GlobalplayerTap))
+                                NbrPlayer = 4;
+                            else if ("6PlayerTap".equals(GlobalplayerTap))
+                                NbrPlayer = 6;
+                            else if ("Soul".equals(GlobalplayerTap))
+                                PlayList = 3;
+                            else if ("Devil".equals(GlobalplayerTap))
+                                PlayList = 1;
+                            else if ("Metroid".equals(GlobalplayerTap))
+                                PlayList = 2;
+                            else if ("Start".equals(GlobalplayerTap))
+                            {
+                                final BattleGroundScene battleGroundScene = new BattleGroundScene(mtApplication, "battleGroundScene", NbrPlayer);
+                                battleGroundScene.setTransition(new FlipTransition(mtApplication, 800));
+                                mtApplication.addScene(battleGroundScene);
+                                mtApplication.pushScene(); 
+                                mtApplication.changeScene(battleGroundScene);
+                            }
+                            ReloadGUI();
                         }
                         return false;
                     }
                 });
-        }
-        //switch (playerTap) {
-        //    case "2PlayerTap":
-        //        
-        //        break;
-        //    default:
-        //        break;
-        //}
     }
 
-    private void reload() {
-       // MTCanvas c = getCanvas();
-        System.out.println(MTSelector);
+    private void ReloadGUI() {
+        
+        if (MTSelector != null && MTChooseModeMessage != null && MTTwoKillerMessage != null && MTFourKillerMessage != null && MTSixKillerMessage != null 
+                && MTChoosePlayMessage != null && MTDevilMessage != null && MTSoulMessage != null && MTMetroidMessage != null && MTPlayMessage != null){
+        getCanvas().addChild(MTINITBACK);
         getCanvas().addChild(MTSelector);
         getCanvas().addChild(MTChooseModeMessage);
         getCanvas().addChild(MTTwoKillerMessage);
@@ -215,6 +183,7 @@ public class ChoosePlayMode extends AbstractScene {
         getCanvas().addChild(MTSoulMessage);
         getCanvas().addChild(MTMetroidMessage);
         getCanvas().addChild(MTPlayMessage);
+        }
     }
     
 
