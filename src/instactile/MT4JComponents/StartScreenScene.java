@@ -63,7 +63,7 @@ public class StartScreenScene extends AbstractScene {
                 if (te.isTapped()) {
                     System.out.println("Tap detect");
                     final ChoosePlayMode choosePlayMode = new ChoosePlayMode(mtApplication, "ChoosePlayMode");
-                    choosePlayMode.setTransition(new FlipTransition(mtApplication, 1500000));
+                    choosePlayMode.setTransition(new FlipTransition(mtApplication, 800));
                     mtApplication.addScene(choosePlayMode);
                     mtApplication.pushScene(); 
                     mtApplication.changeScene(choosePlayMode);

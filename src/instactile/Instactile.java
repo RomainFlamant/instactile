@@ -6,6 +6,7 @@
 package instactile;
 
 import instactile.MT4JComponents.BattleGroundScene;
+import instactile.MT4JComponents.StartScreenScene;
 import org.mt4j.MTApplication;
 
 /**
@@ -23,7 +24,8 @@ public class Instactile extends MTApplication {
 
     @Override
     public void startUp() {
-        addScene(new BattleGroundScene(this, P2D, 6));
+        addScene(new StartScreenScene(this, P2D));
+        //addScene(new BattleGroundScene(this, P2D, 6));
     }
     
 }

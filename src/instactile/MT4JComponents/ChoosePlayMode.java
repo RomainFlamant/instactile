@@ -7,6 +7,7 @@ import java.awt.Component;
 import java.util.List;
 import org.mt4j.AbstractMTApplication;
 import org.mt4j.MTApplication;
+import org.mt4j.components.MTCanvas;
 import org.mt4j.components.MTComponent;
 import org.mt4j.components.visibleComponents.shapes.MTRectangle;
 import org.mt4j.components.visibleComponents.widgets.MTImage;
@@ -17,6 +18,7 @@ import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapProces
 import org.mt4j.sceneManagement.AbstractScene;
 import org.mt4j.sceneManagement.Iscene;
 import org.mt4j.sceneManagement.transition.BlendTransition;
+import org.mt4j.sceneManagement.transition.FlipTransition;
 import org.mt4j.util.MTColor;
 import org.mt4j.util.math.Vector3D;
 import processing.core.PImage;
@@ -45,9 +47,11 @@ public class ChoosePlayMode extends AbstractScene {
     MTImage MTPlayMessage = null;
     PImage Selector = null;
     MTImage MTSelector = null;
+    
     int WIDTH;
     int HEIGHT;
     int NbrPlayer = 4;
+    int PlayList = 2;
     
     AbstractMTApplication mtApplication = null;
     
@@ -59,16 +63,8 @@ public class ChoosePlayMode extends AbstractScene {
         this.setClearColor(MTColor.WHITE);
         this.getCanvas().unregisterAllInputProcessors();
         initImage();
-        getCanvas().addChild(MTSelector);
-        getCanvas().addChild(MTChooseModeMessage);
-        getCanvas().addChild(MTTwoKillerMessage);
-        getCanvas().addChild(MTFourKillerMessage);
-        getCanvas().addChild(MTSixKillerMessage);
-        getCanvas().addChild(MTChoosePlayMessage);
-        getCanvas().addChild(MTDevilMessage);
-        getCanvas().addChild(MTSoulMessage);
-        getCanvas().addChild(MTMetroidMessage);
-        getCanvas().addChild(MTPlayMessage);
+        reload();
+        
         
     }
 
@@ -133,7 +129,7 @@ public class ChoosePlayMode extends AbstractScene {
         MTPlayMessage.setSizeXYGlobal(WIDTH / 5f , 130);
         MTPlayMessage.setPositionGlobal(new Vector3D(WIDTH/2, 800));
         
-        
+        System.out.println("Start Selector");
         Selector = mtApplication.loadImage("data/image/Selector.png");
         MTSelector = new MTImage(mtApplication, Selector);
         MTSelector.unregisterAllInputProcessors();
@@ -144,6 +140,7 @@ public class ChoosePlayMode extends AbstractScene {
             MTSelector.setPositionGlobal(new Vector3D(WIDTH/2, 300));
         else
             MTSelector.setPositionGlobal(new Vector3D(WIDTH/2, 300));
+        System.out.println("End Selector");
     }
 
     private void addTapProcessor(MTComponent mtComp, String playerTap) {
@@ -151,13 +148,46 @@ public class ChoosePlayMode extends AbstractScene {
         
         if (playerTap == "2PlayerTap")
         {
+            NbrPlayer = 2;
+            reload();
+        }
+        else if (playerTap == "4PlayerTap")
+        {
+            NbrPlayer = 4;
+            reload();
+        }
+        else if (playerTap == "6PlayerTap")
+        {
+            NbrPlayer = 6;
+            reload();
+        }
+        else if (playerTap == "Soul")
+        {
+            PlayList = 3;
+            reload();
+        }
+        else if (playerTap == "Devil")
+        {
+            PlayList = 1;
+            reload();
+        }
+        else if (playerTap == "Metroid")
+        {
+            PlayList = 2;
+            reload();
+        }
+        else if (playerTap == "Start")
+        {
             mtComp.addGestureListener(TapProcessor.class, new IGestureEventListener() {
                     public boolean processGestureEvent(MTGestureEvent ge) {
                         TapEvent te = (TapEvent) ge;
                         if (te.isTapped()) {
-                            final BattleGroundScene sceneWindow = new BattleGroundScene(mtApplication, "BattleGroundScene", 6);
-                            sceneWindow.setTransition(new BlendTransition(mtApplication, 300));
-                            mtApplication.addScene(sceneWindow);
+                            System.out.println("Tap detect");
+                            final BattleGroundScene battleGroundScene = new BattleGroundScene(mtApplication, "battleGroundScene", NbrPlayer);
+                            battleGroundScene.setTransition(new FlipTransition(mtApplication, 800));
+                            mtApplication.addScene(battleGroundScene);
+                            mtApplication.pushScene(); 
+                            mtApplication.changeScene(battleGroundScene);
                         }
                         return false;
                     }
@@ -170,6 +200,21 @@ public class ChoosePlayMode extends AbstractScene {
         //    default:
         //        break;
         //}
+    }
+
+    private void reload() {
+       // MTCanvas c = getCanvas();
+        System.out.println(MTSelector);
+        getCanvas().addChild(MTSelector);
+        getCanvas().addChild(MTChooseModeMessage);
+        getCanvas().addChild(MTTwoKillerMessage);
+        getCanvas().addChild(MTFourKillerMessage);
+        getCanvas().addChild(MTSixKillerMessage);
+        getCanvas().addChild(MTChoosePlayMessage);
+        getCanvas().addChild(MTDevilMessage);
+        getCanvas().addChild(MTSoulMessage);
+        getCanvas().addChild(MTMetroidMessage);
+        getCanvas().addChild(MTPlayMessage);
     }
     
 
